@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><!-- /*two hls setting*/ -->
+    <script src="https://cdn.bootcss.com/hls.js/8.0.0-beta.3/hls.min.js"></script> <!-- /*two hls setting*/ -->
+    <title>Rick and Morty</title>
+</head>
+<body>
+   <div box>
+    <header class="header">
+        <a href="#" class="logo">Logo</a>
+        <nav class="navbar">
+           <a href="#">HOME</a>
+           <a href="#">ABOUT</a>
+           <a href="#">SERViCES</a>
+           <a href="#">CONTACT</a>
+        </nav>
+    </header>
+   </div>
+   <video id="player" controls="playsinline"></video>
+   <div class="input-div">
+       <form method="post" id="str-post">
+           <!-- 移除了input元素 -->
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231016/19419_f520450f/2000k/hls/mixed.m3u8')">第一集</button>
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231023/19616_10678ba1/2000k/hls/mixed.m3u8')">第二集</button>
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231030/19785_c63ea65e/2000k/hls/mixed.m3u8')">第三集</button>
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231106/19974_669ce2b6/2000k/hls/index.m3u8')">第四集</button>
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231113/20152_49e3222f/2000k/hls/mixed.m3u8')">第五集</button>
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231120/20313_3a3ca7ea/2000k/hls/mixed.m3u8')">第六集</button>
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231127/20456_dfaff21a/2000k/hls/mixed.m3u8')">第七集</button>
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231204/20604_91c9eae8/2000k/hls/mixed.m3u8')">第八集</button>
+           <button type="button" onclick="playM3u8('https://v.cdnlz9.com/20231211/20737_f966c963/2000k/hls/mixed.m3u8')">第九集</button>
+           <button type="button" onclick="playM3u8('https://s9.fsvod1.com/20231217/a1gqKpx5/2000kb/hls/index.m3u8')">第十集</button>
+       </form>     
+   </div>
+    <script>
+        function playM3u8(url){
+            if(Hls.isSupported()) {
+                var video = document.getElementById('player');
+                video.volume = 1.0;
+                var hls = new Hls();
+                var m3u8Url = decodeURIComponent(url)
+                hls.loadSource(m3u8Url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED,function() {
+                    video.play();
+                });
+            }
+        }
+        $("#str-post").submit(function () {
+            $("html,body").animate({
+                scrollTop: $(".input-div").offset().top - 20
+            }, 200);
+            playM3u8($("#str-post").serializeArray()[0].value);
+            return false;
+        })
+    </script>
+    <!-- <div class="container">
+        <div class="bg-slide">
+            <div class="circle">
+                <img src="img1.jpg">
+            </div>
+        </div>
+    </div> -->
+    <div id="png">
+        <img alt="BLUESTAR" src="1.jpg" style="width: 100px; height: 100px;">
+    </div>
+    <P>MADE BY BLUESTAR</P>
+</body>
+</html>
